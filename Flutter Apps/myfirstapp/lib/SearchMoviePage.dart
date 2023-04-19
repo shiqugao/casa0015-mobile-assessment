@@ -35,7 +35,7 @@ class _MovieSearchState extends State<MovieSearch> {
     });
 
     final response = await http.get(
-        Uri.parse('https://api.themoviedb.org/3/search/movie?query=$query&api_key=YOUR_API_KEY'));
+        Uri.parse('https://api.themoviedb.org/3/search/movie?query=$query&api_key=51bfdd6d2df13c15209d2cb1e0ecf9a5'));
 
     if (response.statusCode == 200) {
       final movies = jsonDecode(response.body)['results'] as List;
