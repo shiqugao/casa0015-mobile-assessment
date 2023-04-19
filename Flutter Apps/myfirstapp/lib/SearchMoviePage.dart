@@ -3,21 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class Movie {
-  final int id;
-  final String title;
-  final String overview;
-
-  Movie({required this.id, required this.title, required this.overview});
-
-  factory Movie.fromJson(Map<String, dynamic> json) {
-    return Movie(
-      id: json['id'],
-      title: json['title'],
-      overview: json['overview'],
-    );
-  }
-}
+import 'movie_details_page.dart';
 
 class MovieSearch extends StatefulWidget {
   @override
@@ -25,72 +11,83 @@ class MovieSearch extends StatefulWidget {
 }
 
 class _MovieSearchState extends State<MovieSearch> {
-  final _searchController = TextEditingController();
-  List<Movie> _movies = [];
-  bool _isLoading = false;
+  List<Map<String, dynamic>> _movies = [];
 
-  Future<List<Movie>> _searchMovies(String query) async {
-    setState(() {
-      _isLoading = true;
+  void _searchMovies(String query) async {
+    final apiKey = 'your_api_key_here';
+    final url = Uri.https('api.themoviedb.org', '/3/search/movie', {
+      'api_key': apiKey,
+      'query': query,
     });
+    final response = await http.get(url);
+    final data = json.decode(response.body);
+    setState(() {
+      _movies = List<Map<String, dynamic>>.from(data['results']);
+    });
+  }
 
-    final response = await http.get(
-        Uri.parse('https://api.themoviedb.org/3/search/movie?query=$query&api_key=51bfdd6d2df13c15209d2cb1e0ecf9a5'));
+  void _showMovieDetails(BuildContext context, Map<String, dynamic> movie) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MovieDetailsPage(movie: movie),
+      ),
+    );
+  }
 
-    if (response.statusCode == 200) {
-      final movies = jsonDecode(response.body)['results'] as List;
-      setState(() {
-        _movies = movies.map((json) => Movie.fromJson(json)).toList();
-        _isLoading = false;
-      });
-      return _movies;
-    } else {
-      throw Exception('Failed to search movies');
-    }
+  Widget _buildSearchResults(BuildContext context) {
+    return ListView.builder(
+      itemCount: _movies.length,
+      itemBuilder: (context, index) {
+        return Card(
+          child: Column(
+            children: [
+              Hero(
+                tag: _movies[index]['id'],
+                child: GestureDetector(
+                  onTap: () {
+                    _showMovieDetails(context, _movies[index]);
+                  },
+                  child: Image.network(
+                    'https://image.tmdb.org/t/p/w500/${_movies[index]['poster_path']}',
+                  ),
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                _movies[index]['title'],
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Movie Search'),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                labelText: 'Search for a movie',
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () async {
-                    await _searchMovies(_searchController.text);
-                  },
-                ),
-              ),
-            ),
+        title: TextField(
+          onSubmitted: (value) => _searchMovies(value),
+          decoration: InputDecoration(
+            hintText: 'Search for a movie...',
+            border: InputBorder.none,
+            hintStyle: TextStyle(color: Colors.white70),
           ),
-          if (_isLoading)
-            Center(
-              child: CircularProgressIndicator(),
-            ),
-          if (_movies.isNotEmpty)
-            Expanded(
-              child: ListView.builder(
-                itemCount: _movies.length,
-                itemBuilder: (context, index) {
-                  final movie = _movies[index];
-                  return ListTile(
-                    title: Text(movie.title),
-                    subtitle: Text(movie.overview),
-                  );
-                },
-              ),
-            ),
-        ],
+          style: TextStyle(color: Colors.white, fontSize: 18),
+        ),
       ),
+      body: _movies.isEmpty
+          ? Center(
+        child: Text('Start searching for movies!'),
+      )
+          : _buildSearchResults(context),
     );
   }
 }

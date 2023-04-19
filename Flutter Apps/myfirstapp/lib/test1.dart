@@ -82,3 +82,44 @@ class _MovieSearchState extends State<MovieSearch> {
   }
 }
 
+
+
+class MovieDetailsPage extends StatefulWidget {
+  final Map<String, dynamic> movie;
+
+  MovieDetailsPage({required this.movie});
+
+  @override
+  _MovieDetailsPageState createState() => _MovieDetailsPageState();
+}
+
+class _MovieDetailsPageState extends State<MovieDetailsPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.movie['title']),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.network('https://image.tmdb.org/t/p/w500/${widget.movie['poster_path']}'),
+            SizedBox(height: 16),
+            Text(
+              widget.movie['title'],
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text(
+              widget.movie['overview'],
+              style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'SearchMoviePage.dart';
-import 'test1.dart';
+import 'SearchMoviePage.dart';
+//import 'test1.dart';
 
 void main() => runApp(new MyApp());
 
