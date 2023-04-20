@@ -1,9 +1,23 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MovieDetailsPage extends StatelessWidget {
   final Map<String, dynamic> movie;
 
   const MovieDetailsPage({Key? key, required this.movie}) : super(key: key);
+
+  void _launchTrailer(BuildContext context) async {
+    final url = 'https://www.youtube.com/watch?v=${movie['video_key']}';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Could not launch trailer'),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +93,12 @@ class MovieDetailsPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 24),
+            Center(
+              child: ElevatedButton(
+                onPressed: () => _launchTrailer(context),
+                child: Text('Watch trailer'),
+              ),
+            ),
           ],
         ),
       ),

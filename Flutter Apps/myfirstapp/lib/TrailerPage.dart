@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TrailerPage extends StatelessWidget {
   final String trailerUrl;
 
-  const TrailerPage({Key? key, required this.trailerUrl}) : super(key: key);
+  TrailerPage({required this.trailerUrl});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: WebView(
-          initialUrl: trailerUrl,
-          javascriptMode: JavascriptMode.unrestricted,
-        ),
+      appBar: AppBar(
+        title: Text('Trailer'),
+      ),
+      body: WebView(
+        initialUrl: trailerUrl,
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }

@@ -14,7 +14,7 @@ class _MovieSearchState extends State<MovieSearch> {
   List<Map<String, dynamic>> _movies = [];
 
   void _searchMovies(String query) async {
-    final apiKey = 'API';
+    final apiKey = 'api';
     final url = Uri.https('api.themoviedb.org', '/3/search/movie', {
       'api_key': apiKey,
       'query': query,
@@ -91,3 +91,118 @@ class _MovieSearchState extends State<MovieSearch> {
     );
   }
 }
+
+
+
+
+
+// import 'dart:convert';
+//
+// import 'package:flutter/material.dart';
+// import 'package:http/http.dart' as http;
+//
+// import 'movie_details_page.dart';
+// import 'TrailerPage.dart';
+//
+// class MovieSearch extends StatefulWidget {
+//   @override
+//   _MovieSearchState createState() => _MovieSearchState();
+// }
+//
+// class _MovieSearchState extends State<MovieSearch> {
+//   List<Map<String, dynamic>> _movies = [];
+//
+//   void _searchMovies(String query) async {
+//     final apiKey = 'API_KEY';
+//     final url = Uri.https('api.themoviedb.org', '/3/search/movie', {
+//       'api_key': apiKey,
+//       'query': query,
+//     });
+//     final response = await http.get(url);
+//     final data = json.decode(response.body);
+//     setState(() {
+//       _movies = List<Map<String, dynamic>>.from(data['results']);
+//     });
+//   }
+//
+//   void _showMovieDetails(BuildContext context, Map<String, dynamic> movie) {
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(
+//         builder: (context) => MovieDetailsPage(
+//           movieId: movie['id'],
+//           movieTitle: movie['title'],
+//         ),
+//       ),
+//     );
+//   }
+//
+//   Widget _buildSearchResults(BuildContext context) {
+//     return ListView.builder(
+//       itemCount: _movies.length,
+//       itemBuilder: (context, index) {
+//         return Card(
+//           child: Column(
+//             children: [
+//               Hero(
+//                 tag: _movies[index]['id'],
+//                 child: GestureDetector(
+//                   onTap: () {
+//                     _showMovieDetails(context, _movies[index]);
+//                   },
+//                   child: Image.network(
+//                     'https://image.tmdb.org/t/p/w500/${_movies[index]['poster_path']}',
+//                   ),
+//                 ),
+//               ),
+//               SizedBox(height: 8),
+//               GestureDetector(
+//                 onTap: () {
+//                   Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => TrailerPage(
+//                         movieId: _movies[index]['id'],
+//                       ),
+//                     ),
+//                   );
+//                 },
+//                 child: Text(
+//                   _movies[index]['title'],
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     fontWeight: FontWeight.bold,
+//                     color: Colors.blue,
+//                   ),
+//                   textAlign: TextAlign.center,
+//                 ),
+//               ),
+//             ],
+//           ),
+//         );
+//       },
+//     );
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: TextField(
+//           onSubmitted: (value) => _searchMovies(value),
+//           decoration: InputDecoration(
+//             hintText: 'Search for a movie...',
+//             border: InputBorder.none,
+//             hintStyle: TextStyle(color: Colors.white70),
+//           ),
+//           style: TextStyle(color: Colors.white, fontSize: 18),
+//         ),
+//       ),
+//       body: _movies.isEmpty
+//           ? Center(
+//         child: Text('Start searching for movies!'),
+//       )
+//           : _buildSearchResults(context),
+//     );
+//   }
+// }
