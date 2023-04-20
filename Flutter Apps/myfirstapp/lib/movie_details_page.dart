@@ -1,23 +1,66 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MovieDetailsPage extends StatelessWidget {
   final Map<String, dynamic> movie;
 
   const MovieDetailsPage({Key? key, required this.movie}) : super(key: key);
 
+  // void _launchTrailer(BuildContext context) async {
+  //   final videoKey = movie['video_key'];
+  //   if (videoKey == null) {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text('Trailer not available'),
+  //     ));
+  //     return;
+  //   }
+  //   final url = 'https://www.youtube.com/watch?v=$videoKey';
+  //   if (await canLaunch(url)) {
+  //     await launch(url);
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text('Could not launch trailer'),
+  //     ));
+  //   }
+  // }
+
+
   void _launchTrailer(BuildContext context) async {
-    final url = 'https://www.youtube.com/watch?v=${movie['video_key']}';
-    if (await canLaunch(url)) {
-      await launch(url);
+    final movieId = movie['id'];
+    final response = await http.get(Uri.https('api.themoviedb.org', '/3/movie/$movieId/videos', {
+      'api_key': 'API',
+      'language': 'en-US',
+    }));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final videos = data['results'] as List<dynamic>;
+
+      if (videos.isNotEmpty) {
+        final videoKey = videos.first['key'];
+        final url = 'https://www.youtube.com/watch?v=$videoKey';
+
+        if (await canLaunch(url)) {
+          await launch(url);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Could not launch trailer'),
+          ));
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Trailer not available'),
+        ));
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Could not launch trailer'),
+        content: Text('Could not fetch video data'),
       ));
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
