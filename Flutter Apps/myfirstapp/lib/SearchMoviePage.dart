@@ -14,7 +14,7 @@ class _MovieSearchState extends State<MovieSearch> {
   List<Map<String, dynamic>> _movies = [];
 
   void _searchMovies(String query) async {
-    final apiKey = 'your_api_key_here';
+    final apiKey = '51bfdd6d2df13c15209d2cb1e0ecf9a5';
     final url = Uri.https('api.themoviedb.org', '/3/search/movie', {
       'api_key': apiKey,
       'query': query,
