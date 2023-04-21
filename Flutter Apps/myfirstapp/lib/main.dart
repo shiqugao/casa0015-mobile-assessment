@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
 
-        title: 'Book search',
+        title: 'Moive search',
         theme: new ThemeData(
           primaryColor: new Color(0xFF0F2533),
         ),

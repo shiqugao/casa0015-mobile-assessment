@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -11,12 +10,18 @@ class MovieSearch extends StatefulWidget {
 
 class _MovieSearchState extends State<MovieSearch> {
   List<Map<String, dynamic>> _movies = [];
-
+  String _sortBy = 'popularity.desc'; // default sort order
   Future<void> _fetchMovies(String query) async {
     final apiKey = 'api';
     final url = query.isEmpty
-        ? Uri.https('api.themoviedb.org', '/3/movie/popular', {'api_key': apiKey})
-        : Uri.https('api.themoviedb.org', '/3/search/movie', {'api_key': apiKey, 'query': query});
+        ? Uri.https('api.themoviedb.org', '/3/discover/movie', {
+      'api_key': apiKey,
+      'sort_by': _sortBy,
+    })
+        : Uri.https('api.themoviedb.org', '/3/search/movie', {
+      'api_key': apiKey,
+      'query': query,
+    });
     final response = await http.get(url);
     final data = json.decode(response.body);
     setState(() {
@@ -31,6 +36,13 @@ class _MovieSearchState extends State<MovieSearch> {
         builder: (context) => MovieDetailsPage(movie: movie),
       ),
     );
+  }
+
+  void _sortMovies(String sortBy) {
+    setState(() {
+      _sortBy = sortBy;
+    });
+    _fetchMovies('');
   }
 
   Widget _buildSearchResults(BuildContext context) {
@@ -86,6 +98,27 @@ class _MovieSearchState extends State<MovieSearch> {
           ),
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: _sortMovies,
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem<String>(
+                  value: 'popularity.desc',
+                  child: Text('Popularity'),
+                ),
+                PopupMenuItem<String>(
+                  value: 'release_date.desc',
+                  child: Text('Release Date'),
+                ),
+                PopupMenuItem<String>(
+                  value: 'vote_average.desc',
+                  child: Text('Rating'),
+                ),
+              ];
+            },
+          ),
+        ],
       ),
       body: _movies.isEmpty
           ? Center(
@@ -95,5 +128,4 @@ class _MovieSearchState extends State<MovieSearch> {
     );
   }
 }
-
 
