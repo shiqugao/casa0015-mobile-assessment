@@ -11,7 +11,7 @@ class MovieDetailsPage extends StatelessWidget {
   void _launchTrailer(BuildContext context) async {
     final movieId = movie['id'];
     final response = await http.get(Uri.https('api.themoviedb.org', '/3/movie/$movieId/videos', {
-      'api_key': '51bfdd6d2df13c15209d2cb1e0ecf9a5',
+      'api_key': 'api',
       'language': 'en-US',
     }));
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'movie_details_page.dart';
+import 'MyFavorite.dart';
 
 class MovieSearch extends StatefulWidget {
   @override
@@ -120,12 +121,23 @@ class _MovieSearchState extends State<MovieSearch> {
           ),
         ],
       ),
+
+      floatingActionButton: FloatingActionButton(
+        focusColor: Colors.green,
+        tooltip: 'My Favorite',
+        autofocus: true,
+        onPressed:      () async {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => MyFavorite()));
+    },
+        child: Icon(Icons.star_rate),
+      ),
       body: _movies.isEmpty
           ? Center(
         child: Text('Start searching for movies!'),
       )
           : _buildSearchResults(context),
+
     );
   }
 }
-
