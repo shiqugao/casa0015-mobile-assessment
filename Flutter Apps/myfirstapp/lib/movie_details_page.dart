@@ -8,25 +8,6 @@ class MovieDetailsPage extends StatelessWidget {
 
   const MovieDetailsPage({Key? key, required this.movie}) : super(key: key);
 
-  // void _launchTrailer(BuildContext context) async {
-  //   final videoKey = movie['video_key'];
-  //   if (videoKey == null) {
-  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //       content: Text('Trailer not available'),
-  //     ));
-  //     return;
-  //   }
-  //   final url = 'https://www.youtube.com/watch?v=$videoKey';
-  //   if (await canLaunch(url)) {
-  //     await launch(url);
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //       content: Text('Could not launch trailer'),
-  //     ));
-  //   }
-  // }
-
-
   void _launchTrailer(BuildContext context) async {
     final movieId = movie['id'];
     final response = await http.get(Uri.https('api.themoviedb.org', '/3/movie/$movieId/videos', {

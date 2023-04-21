@@ -1,8 +1,7 @@
-import 'dart:convert';
 
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
 import 'movie_details_page.dart';
 
 class MovieSearch extends StatefulWidget {
@@ -13,30 +12,11 @@ class MovieSearch extends StatefulWidget {
 class _MovieSearchState extends State<MovieSearch> {
   List<Map<String, dynamic>> _movies = [];
 
-  @override
-  void initState() {
-    super.initState();
-    _fetchRecommendedMovies();
-  }
-
-  void _fetchRecommendedMovies() async {
+  Future<void> _fetchMovies(String query) async {
     final apiKey = 'api';
-    final url = Uri.https('api.themoviedb.org', '/3/movie/popular', {
-      'api_key': apiKey,
-    });
-    final response = await http.get(url);
-    final data = json.decode(response.body);
-    setState(() {
-      _movies = List<Map<String, dynamic>>.from(data['results']);
-    });
-  }
-
-  void _searchMovies(String query) async {
-    final apiKey = 'api';
-    final url = Uri.https('api.themoviedb.org', '/3/search/movie', {
-      'api_key': apiKey,
-      'query': query,
-    });
+    final url = query.isEmpty
+        ? Uri.https('api.themoviedb.org', '/3/movie/popular', {'api_key': apiKey})
+        : Uri.https('api.themoviedb.org', '/3/search/movie', {'api_key': apiKey, 'query': query});
     final response = await http.get(url);
     final data = json.decode(response.body);
     setState(() {
@@ -88,11 +68,17 @@ class _MovieSearchState extends State<MovieSearch> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _fetchMovies('');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: TextField(
-          onSubmitted: (value) => _searchMovies(value),
+          onSubmitted: (value) => _fetchMovies(value),
           decoration: InputDecoration(
             hintText: 'Search for a movie...',
             border: InputBorder.none,
@@ -109,8 +95,5 @@ class _MovieSearchState extends State<MovieSearch> {
     );
   }
 }
-
-
-
 
 
