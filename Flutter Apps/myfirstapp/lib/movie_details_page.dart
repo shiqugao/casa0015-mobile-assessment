@@ -13,7 +13,7 @@ class MovieDetailsPage extends StatelessWidget {
   void _launchTrailer(BuildContext context) async {
     final movieId = movie['id'];
     final response = await http.get(Uri.https('api.themoviedb.org', '/3/movie/$movieId/videos', {
-      'api_key': 'api',
+      'api_key': 'API',
       'language': 'en-US',
     }));
 
@@ -62,6 +62,7 @@ class MovieDetailsPage extends StatelessWidget {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,18 +90,25 @@ class MovieDetailsPage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 24),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                movie['title'],
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    movie['title'],
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _addToFavorites(context),
+                    child: Text('I have watched it'),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
@@ -139,16 +147,10 @@ class MovieDetailsPage extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () => _launchTrailer(context),
-                child: Text('Watch trailer'),
+                child: Text('Watch Trailer'),
               ),
             ),
-            SizedBox(height: 8),
-            Center(
-              child: ElevatedButton(
-                onPressed: () => _addToFavorites(context),
-                child: Text('I have watched it'),
-              ),
-            ),
+            SizedBox(height: 16),
           ],
         ),
       ),
