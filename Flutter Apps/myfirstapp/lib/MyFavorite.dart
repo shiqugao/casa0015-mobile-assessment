@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'SearchMoviePage.dart';
 
 class MyFavorite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Favorites'),
+        title: Text('Millstone'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('favorites').snapshots(),
@@ -66,6 +67,15 @@ class MyFavorite extends StatelessWidget {
             );
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MovieSearch()),
+          );
+        },
+        child: Icon(Icons.search),
       ),
     );
   }

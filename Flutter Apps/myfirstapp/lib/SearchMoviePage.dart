@@ -124,7 +124,7 @@ class _MovieSearchState extends State<MovieSearch> {
 
       floatingActionButton: FloatingActionButton(
         focusColor: Colors.green,
-        tooltip: 'My Favorite',
+        tooltip: 'Millstone',
         autofocus: true,
         onPressed:      () async {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -141,3 +141,5 @@ class _MovieSearchState extends State<MovieSearch> {
     );
   }
 }
+
+

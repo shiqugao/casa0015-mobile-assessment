@@ -51,12 +51,12 @@ class MovieDetailsPage extends StatelessWidget {
       print('Adding movie to favorites: $movie');
       await FirebaseFirestore.instance.collection('favorites').add(movie);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Added to favorites'),
+        content: Text('Added to millstone'),
       ));
       print('Movie added to favorites: $movie');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Could not add to favorites $e'),
+        content: Text('Could not add to millstone'),
       ));
       print('Error adding movie to favorites: $e');
     }
@@ -146,7 +146,7 @@ class MovieDetailsPage extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () => _addToFavorites(context),
-                child: Text('Add to favorites'),
+                child: Text('I have watched it'),
               ),
             ),
           ],
