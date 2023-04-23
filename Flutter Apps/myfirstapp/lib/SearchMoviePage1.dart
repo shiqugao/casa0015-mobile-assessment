@@ -13,7 +13,7 @@ class _MovieSearchState extends State<MovieSearch> {
   List<Map<String, dynamic>> _movies = [];
   String _sortBy = 'popularity.desc'; // default sort order
   Future<void> _fetchMovies(String query) async {
-    final apiKey = '51bfdd6d2df13c15209d2cb1e0ecf9a5';
+    final apiKey = 'API';
     final url = query.isEmpty
         ? Uri.https('api.themoviedb.org', '/3/discover/movie', {
       'api_key': apiKey,
