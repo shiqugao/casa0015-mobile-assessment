@@ -13,7 +13,7 @@ class _MovieSearchState extends State<MovieSearch> {
   List<Map<String, dynamic>> _movies = [];
   String _sortBy = 'popularity.desc'; // default sort order
   Future<void> _fetchMovies(String query) async {
-    final apiKey = 'api';
+    final apiKey = 'API';
     final url = query.isEmpty
         ? Uri.https('api.themoviedb.org', '/3/discover/movie', {
       'api_key': apiKey,
@@ -106,15 +106,33 @@ class _MovieSearchState extends State<MovieSearch> {
               return [
                 PopupMenuItem<String>(
                   value: 'popularity.desc',
-                  child: Text('Popularity'),
+                  child: Row(
+                    children: [
+                      Icon(Icons.trending_up_rounded),
+                      SizedBox(width: 8),
+                      Text('Popularity'),
+                    ],
+                  ),
                 ),
                 PopupMenuItem<String>(
                   value: 'release_date.desc',
-                  child: Text('Release Date'),
+                  child: Row(
+                    children: [
+                      Icon(Icons.calendar_today_rounded),
+                      SizedBox(width: 8),
+                      Text('Release Date'),
+                    ],
+                  ),
                 ),
                 PopupMenuItem<String>(
                   value: 'vote_average.desc',
-                  child: Text('Rating'),
+                  child: Row(
+                    children: [
+                      Icon(Icons.star_rounded),
+                      SizedBox(width: 8),
+                      Text('Rating'),
+                    ],
+                  ),
                 ),
               ];
             },
@@ -123,21 +141,70 @@ class _MovieSearchState extends State<MovieSearch> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        focusColor: Colors.green,
-        tooltip: 'Millstone',
-        autofocus: true,
-        onPressed:      () async {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => MyFavorite()));
-    },
+        tooltip: 'My Favorite Movies',
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyFavorite()),
+          );
+        },
         child: Icon(Icons.star_rate),
       ),
+
       body: _movies.isEmpty
           ? Center(
-        child: Text('Start searching for movies!'),
+        child: Text(
+          'Start searching for movies!',
+          style: TextStyle(fontSize: 24),
+        ),
       )
-          : _buildSearchResults(context),
-
+          : GridView.builder(
+        padding: EdgeInsets.all(8),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          childAspectRatio: 0.7,
+        ),
+        itemCount: _movies.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () => _showMovieDetails(context, _movies[index]),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: Hero(
+                    tag: _movies[index]['id'],
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        'https://image.tmdb.org/t/p/w500/${_movies[index]['poster_path']}',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  _movies[index]['title'],
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'Release date: ${_movies[index]['release_date']}',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
