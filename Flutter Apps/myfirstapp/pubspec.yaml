@@ -40,6 +40,9 @@ dependencies:
   webview_flutter: ^4.1.0
   youtube_player_flutter: ^8.1.2
   url_launcher: ^6.1.10
+  cloud_firestore: ^4.5.2
+  firebase_auth: ^4.4.2
+  firebase_core: ^2.10.0
 
 dev_dependencies:
   flutter_test:

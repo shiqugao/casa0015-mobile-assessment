@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MovieDetailsPage extends StatelessWidget {
   final Map<String, dynamic> movie;
@@ -42,6 +44,23 @@ class MovieDetailsPage extends StatelessWidget {
     }
   }
 
+
+
+  void _addToFavorites(BuildContext context) async {
+    try {
+      print('Adding movie to favorites: $movie');
+      await FirebaseFirestore.instance.collection('favorites').add(movie);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Added to favorites'),
+      ));
+      print('Movie added to favorites: $movie');
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Could not add to favorites $e'),
+      ));
+      print('Error adding movie to favorites: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,6 +140,13 @@ class MovieDetailsPage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => _launchTrailer(context),
                 child: Text('Watch trailer'),
+              ),
+            ),
+            SizedBox(height: 8),
+            Center(
+              child: ElevatedButton(
+                onPressed: () => _addToFavorites(context),
+                child: Text('Add to favorites'),
               ),
             ),
           ],

@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'SearchMoviePage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 //import 'test1.dart';
 
-void main() => runApp(new MyApp());
+// void main() => runApp(new MyApp());
+//
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -24,5 +35,9 @@ class MyApp extends StatelessWidget {
       );
   }
 }
+
+
+
+
 
 
