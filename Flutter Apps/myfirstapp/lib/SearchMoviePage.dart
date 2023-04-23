@@ -46,40 +46,6 @@ class _MovieSearchState extends State<MovieSearch> {
     _fetchMovies('');
   }
 
-  Widget _buildSearchResults(BuildContext context) {
-    return ListView.builder(
-      itemCount: _movies.length,
-      itemBuilder: (context, index) {
-        return Card(
-          child: Column(
-            children: [
-              Hero(
-                tag: _movies[index]['id'],
-                child: GestureDetector(
-                  onTap: () {
-                    _showMovieDetails(context, _movies[index]);
-                  },
-                  child: Image.network(
-                    'https://image.tmdb.org/t/p/w500/${_movies[index]['poster_path']}',
-                  ),
-                ),
-              ),
-              SizedBox(height: 8),
-              Text(
-                _movies[index]['title'],
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
   @override
   void initState() {
     super.initState();
@@ -141,7 +107,7 @@ class _MovieSearchState extends State<MovieSearch> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        tooltip: 'My Favorite Movies',
+        tooltip: 'Millstone',
         onPressed: () {
           Navigator.push(
             context,
