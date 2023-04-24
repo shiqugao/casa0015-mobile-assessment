@@ -104,7 +104,9 @@ class MovieDetailsPage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () => _addToFavorites(context),
-                    child: Text('I have watched it'),
+                    child: Icon(
+                      Icons.done_outline,
+                    ),
                   ),
                 ],
               ),
