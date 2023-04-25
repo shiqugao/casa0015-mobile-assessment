@@ -12,7 +12,7 @@ Movie search Page:
 
 4: jump to millstone page
 
-<img src =:image/moviesearchpage.png">
+<img src ="image/moviesearchpage.png">
 
 
 Movie detail page
@@ -22,13 +22,13 @@ Movie detail page
 
 3.Watch trailer on Youtube
                                      
-<img src =:image/moviedetailpage.png">
+<img src ="image/moviedetailpage.png">
 
 
 Millstone page
 These two buttons are all responsible for back to movie search page.
 
-<img src =:image/millstone.png" width ="30%" >
+<img src ="image/millstone.png" width ="30%" >
 
 ## Api selection:
 the movie DB API, it cantains most movie in the word and it still updated this time.
