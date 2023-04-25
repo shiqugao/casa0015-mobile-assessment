@@ -11,6 +11,7 @@ Movie search Page:
 3: can choose different sorting way
 
 4: jump to millstone page
+
 <img src =:image/moviesearchpage.png">
 
 
@@ -20,12 +21,14 @@ Movie detail page
 2.Click that button shows you have finish watching that movie and add it to millstone page
 
 3.Watch trailer on Youtube
+                                     
 <img src =:image/moviedetailpage.png">
 
 
 Millstone page
 These two buttons are all responsible for back to movie search page.
-<img src =:image/millstone.png">
+
+<img src =:image/millstone.png" width ="30%" >
 
 ## Api selection:
 the movie DB API, it cantains most movie in the word and it still updated this time.
