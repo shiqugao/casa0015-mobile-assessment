@@ -5,18 +5,27 @@ This app is create for user to search,sorting movie with their like.and for the 
 ## details in seperate pages 
 Movie search Page:
 1: for search function, can show the search result after input the key word
+
 2: click on the poster of movie can jump to movie detail page
+
 3: can choose different sorting way
+
 4: jump to millstone page
+<img src =:Image/moviesearchpage.png">
 
 
 Movie detail page
 1.Back to search results
+
 2.Click that button shows you have finish watching that movie and add it to millstone page
+
 3.Watch trailer on Youtube
+<img src =:Image/moviedetailpage.png">
+
 
 Millstone page
 These two buttons are all responsible for back to movie search page.
+<img src =:Image/millstone.png">
 
 ## Api selection:
 the movie DB API, it cantains most movie in the word and it still updated this time.
