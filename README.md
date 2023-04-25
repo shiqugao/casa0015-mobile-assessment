@@ -12,7 +12,7 @@ Movie search Page:
 
 4: jump to millstone page
 
-<img src ="image/moviesearchpage.png">
+<img src ="image/moviesearchpage.png" width ="30%">
 
 
 Movie detail page
@@ -22,7 +22,7 @@ Movie detail page
 
 3.Watch trailer on Youtube
                                      
-<img src ="image/moviedetailpage.png">
+<img src ="image/moviedetailpage.png" width ="30%">
 
 
 Millstone page
