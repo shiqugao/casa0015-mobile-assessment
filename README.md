@@ -1,23 +1,39 @@
 # Movie Home
 
-This is the Final assessment template for CASA0014 - Please use this template and edit the relevant sections to personalise.
-This section has a short introduction to what the application is
+This app is create for user to search,sorting movie with their like.and for the user who like to collecti how many movies they have seen.
 
-## Use this README File 
-
-Use this section to show us what your Mobile App is about.   Include a Screenshot to the App, link to the various frameworks you've used. Include your presentation video here that shows off your Mobile App.   Emojis are also fun to include 📱 😄
-
-Look at some other Flutter Apps online and see how they use there README File.  Good examples are:
-
-- https://github.com/miickel/flutter_particle_clock
-- https://github.com/Tarikul711/flutter-food-delivery-app-ui    
-- https://github.com/mohak1283/Instagram-Clone
+## details in seperate pages 
+Movie search Page:
+1: for search function, can show the search result after input the key word
+2: click on the poster of movie can jump to movie detail page
+3: can choose different sorting way
+4: jump to millstone page
 
 
-## Include A Section That Tells Developers How To Install The App
+Movie detail page
+1.Back to search results
+2.Click that button shows you have finish watching that movie and add it to millstone page
+3.Watch trailer on Youtube
 
-Include a section that gives intructions on how to install the app or run it in Flutter.  What versions of the plugins are you assuming?  Maybe define a licence
+Millstone page
+These two buttons are all responsible for back to movie search page.
 
-##  Contact Details
+## Api selection:
+the movie DB API, it cantains most movie in the word and it still updated this time.
 
-Having Contact Details is also good as it shows people how to get in contact with you if they'd like to contribute to the app. 
+## Dependency of this project
+After download this project still need to download some dependency to make the code work.
+
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+please google these and make sure these have been doneload properly.
+
+
+
+
