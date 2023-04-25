@@ -4,6 +4,7 @@ This app is create for user to search,sorting movie with their like.and for the 
 
 ## details in seperate pages 
 Movie search Page:
+
 1: for search function, can show the search result after input the key word
 
 2: click on the poster of movie can jump to movie detail page
@@ -16,6 +17,7 @@ Movie search Page:
 
 
 Movie detail page
+
 1.Back to search results
 
 2.Click that button shows you have finish watching that movie and add it to millstone page
@@ -26,6 +28,7 @@ Movie detail page
 
 
 Millstone page
+
 These two buttons are all responsible for back to movie search page.
 
 <img src ="image/millstone.png" width ="30%" >
