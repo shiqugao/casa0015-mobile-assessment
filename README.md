@@ -24,13 +24,13 @@ the movie DB API, it cantains most movie in the word and it still updated this t
 ## Dependency of this project
 After download this project still need to download some dependency to make the code work.
 
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:flutter/material.dart'; 
+import 'package:url_launcher/url_launcher.dart'; 
+import 'package:http/http.dart' as http; 
+import 'dart:convert'; 
+import 'package:cloud_firestore/cloud_firestore.dart'; 
+import 'package:firebase_core/firebase_core.dart'; 
+import 'firebase_options.dart'; 
 
 please google these and make sure these have been doneload properly.
 
