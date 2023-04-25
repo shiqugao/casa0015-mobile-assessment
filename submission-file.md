@@ -8,39 +8,27 @@ date: "10 Dec 2021"
 
 -->
 
-# Submission Guide
-
-You will need to edit this file, create a PDF using the instructions below, from this file.   Sign it digitally and upload to Moodle
-
-## How to create a PDF from Markdown
-When finished you should export to PDF using VSCode and MarkdownPDF Extension. Make sure you select no headers and no footers in the
-extension preferences before exporting to PDF.   
-
-Upload this PDF into Moodle for submission including a copy of your presentation slides.
 
 ## Link to GitHub Repository
 
-Flutter Application Name - MY APPLICATION NAME
-GitHub Repository - [https://github.com/ucl-casa-ce/casa0015-mobile-assessment](https://github.com/ucl-casa-ce/casa0015-mobile-assessment)
+Flutter Application Name -  Movie Home
+GitHub Repository - [https://github.com/shiqugao/casa0015-mobile-assessment](https://github.com/shiqugao/casa0015-mobile-assessment)
 
 ## Introduction to Application
 
-A brief 200 word explanation of your application and it's use.  Below create a Bibliography to code, tutorial, or plugins you've used in the project. Use this guide
-for citation - [https://www.scribbr.co.uk/referencing/harvard-website-reference/](https://www.scribbr.co.uk/referencing/harvard-website-reference/)
+In this project, the main function of the project is to provide a movie display page. The sorting and search functions are available on this interface and the user can sort the interface according to their needs based on elements such as popularity, rating etc. The application also allows the user to search by keywords. When the user clicks on a film poster, they can be redirected to the film's details page, where they can click on a button to mark the film as seen, or click on a button to go to youtube to see the film's trailer. Once the film has been marked as seen, the film's poster can then be seen on the millstone page.
 
 ## Biblography
+1. Gomery, D., & Pafort-Overduin, C. (2011). Movie history: A survey. Taylor & Francis
 
-1. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). <http://google.com>
 
-2. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s).  <http://google.com>
 
-----
 
 ## Declaration of Authorship
 
-We, AUTHORS NAME HERE, confirm that the work presented in this assessment is my own. Where information has been derived from other sources, I confirm that this has been indicated in the work.
+We, Shiqu Gao, confirm that the work presented in this assessment is my own. Where information has been derived from other sources, I confirm that this has been indicated in the work.
 
 
 Digitally Sign with Your name Here
 
-ASSESSMENT DATE
+25/04/2023
